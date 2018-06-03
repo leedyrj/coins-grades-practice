@@ -37,37 +37,75 @@ console.log(dollarAmount)
 
 //CASH TO COINS ASSIGNMENT
 
-// console.log(Math.floor(553/25))
-// console.log(553%25)
+//Declare value for each coin
+const coinQuart = 25;
+const coinDime = 10;
+const coinNick = 05;
+const coinPenny = 01;
+let actualCash = '';
 
-const coinQuart = .25;
-const coinDime = .1;
-const coinNick = .05;
-const coinPenny = .01;
-
-const moneyFunc = cashToCoin => {
-    const quartProd = Math.floor(cashToCoin/coinQuart);
-    const quartMod = (cashToCoin % coinQuart);
-    const dimeProd = Math.floor(quartMod/coinDime) ;
-    const dimeMod = (quartMod % coinDime);
-    const nickProd = Math.floor(dimeMod/coinNick);
-    const nickMod = (dimeMod % coinNick);
-    const pennyProd = Math.floor(nickMod/coinPenny);
-    const pennyMod = (nickMod % coinPenny);
-    // console.log(quartProd);
-    // console.log(quartMod);
-    // console.log(dimeProd);
-    // console.log(dimeMod);
-    // console.log(nickProd);
-    // console.log(nickMod);
-    // console.log(pennyProd);
-    // console.log(pennyMod)
-    return ('Quarters' + ': ' + quartProd + "; " + 'Dimes' + ': ' + dimeProd + ';' + ' Nickels' + ': ' + nickProd + "; " + 'Pennies' + ': ' + pennyProd)
+//function takes actualCash parameter of any number value
+const moneyFunc = actualCash => {
+    if (isNaN(actualCash)) {
+        alert('Please enter a numerical value')
+    } else {
+        let cashToCoin = (actualCash * 100)
+        const quartProd = Math.floor(cashToCoin/coinQuart);
+        const quartMod = (cashToCoin % coinQuart);
+        const dimeProd = Math.floor(quartMod/coinDime) ;
+        const dimeMod = (quartMod % coinDime);
+        const nickProd = Math.floor(dimeMod/coinNick);
+        const nickMod = (dimeMod % coinNick);
+        const pennyProd = Math.floor(nickMod/coinPenny);
+        const pennyMod = (nickMod % coinPenny);
+        return ('Quarters' + ': ' + quartProd + "; " + 'Dimes' + ': ' + dimeProd + ';' + ' Nickels' + ': ' + nickProd + "; " + 'Pennies' + ': ' + pennyProd)
+    }
 }
-const coinsFromCash = moneyFunc()
-console.log(moneyFunc(3.48))
+//store output to variable
+const returnCoins = moneyFunc(actualCash);
 
+//Create HTML elements using JavaScript!
 
+//Create an article appeneded to empty div in HTML
+const article = document.createElement('article');
+const div = document.getElementById('dom-practice');
+div.appendChild(article);
 
+//Create an h1, p, form and text input and...
+const headThree = document.createElement('h3');
+const headText = document.createTextNode('Welcome!')
+const para = document.createElement('p');
+const paraText = document.createTextNode('Enter a cash value to have it converted to coins.');
+const form = document.createElement('form');
+const enterCash = document.createElement("input");
+//...append to dom
+headThree.appendChild(headText);
+article.appendChild(headThree);
+para.appendChild(paraText);
+article.appendChild(para);
+enterCash.setAttribute('id', 'enter-cash');
+article.appendChild(form);
+form.appendChild(enterCash);
 
+//Create button and append to dom
+const span = document.createElement('span');
+const coinButton = document.createElement('button');
+article.appendChild(span);
+coinButton.innerHTML = 'ENTER';
+coinButton.setAttribute('id', 'coin-button');
+span.appendChild(coinButton);
 
+//create submit event on form to call function and
+//Create empty container and output function to dom
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    parseInt(enterCash.value);
+    moneyFunc(enterCash.value);
+    const outputCont = document.createElement('div');
+    const funcOutput = document.createElement('h5');
+    const funcText = document.createTextNode(returnCoins);
+    outputCont.setAttribute('id', 'output-container');
+    span.appendChild(outputCont);
+    funcOutput.appendChild(funcText);
+    outputCont.appendChild(funcOutput);
+});
