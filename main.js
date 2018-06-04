@@ -42,8 +42,7 @@ const coinQuart = 25;
 const coinDime = 10;
 const coinNick = 05;
 const coinPenny = 01;
-let actualCash = '';
-
+let actualCash = ''
 //function takes actualCash parameter of any number value
 const moneyFunc = actualCash => {
     if (isNaN(actualCash)) {
@@ -62,7 +61,10 @@ const moneyFunc = actualCash => {
     }
 }
 //store output to variable
-const returnCoins = moneyFunc(actualCash);
+console.log(moneyFunc(.98))
+let returnCoins = moneyFunc(.98);
+moneyFunc(.98)
+console.log(returnCoins)
 
 //Create HTML elements using JavaScript!
 
@@ -101,6 +103,7 @@ form.addEventListener('submit', (e) => {
     e.preventDefault();
     parseInt(enterCash.value);
     moneyFunc(enterCash.value);
+    returnCoins = moneyFunc(enterCash.value)
     const outputCont = document.createElement('div');
     const funcOutput = document.createElement('h5');
     const funcText = document.createTextNode(returnCoins);
